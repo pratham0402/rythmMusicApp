@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:background="#93D6F8"
         android:outlineSpotShadowColor="@color/colorAccent"
-        android:background="@color/colorAccent"
         android:visibility="visible"
         tools:visibility="visible" />
 
@@ -36,12 +36,13 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:textSize="10sp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:background="@color/colorPrimary"
             android:layout_margin="5dp"
             android:onClick="openAudioFiles"
             android:text="Upload Song"
+            android:textStyle="italic"
             android:id="@+id/openAudioFiles"></Button>
 
         <TextView
@@ -66,7 +67,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="35dp"
         android:text="UPLOAD"
         android:onClick="uploadFileToFirebase"
         android:layout_margin="5dp"
