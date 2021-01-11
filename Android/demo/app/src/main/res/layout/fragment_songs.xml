@@ -12,4 +12,12 @@
         android:id="@+id/recycler"
         android:background="@color/colorPrimaryDark"/>
 
+    <com.example.jean.jcplayer.view.JcPlayerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:id="@+id/jcplayer_off"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>

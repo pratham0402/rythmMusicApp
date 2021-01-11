@@ -3,8 +3,11 @@ package com.example.demo;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
@@ -22,8 +25,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+//import static com.example.demo.SongsFragment.jcAudios_off;
+//import static com.example.demo.SongsFragment.jcPlayerView_off;
+import static com.example.demo.online_songs.jcPlayerView;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder> {
 
@@ -49,6 +59,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder> 
         byte[] image = getAlbumArt(mSongs.get(position).getPath());
         if(image != null){
             Glide.with(mContext).asBitmap().load(image).into(holder.imageView);
+//            InputStream is = new ByteArrayInputStream(image);
+//            Bitmap bm = BitmapFactory.decodeStream(is);
+//            holder.imageView.setImageBitmap(bm);
         }
         else {
             Glide.with(mContext).load(R.drawable.comm).into(holder.imageView);
@@ -60,6 +73,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder> 
                 Intent intent = new Intent(mContext, Player.class);
                 intent.putExtra("position", position);
                 mContext.startActivity(intent);
+                //jcPlayerView.kill();
+//                jcPlayerView_off.playAudio(jcAudios_off.get(position));
+//                jcPlayerView_off.setVisibility(View.VISIBLE);
+//                jcPlayerView_off.createNotification();
             }
         });
         holder.menu_opt.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +149,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder> 
     // getting album art
     private byte[] getAlbumArt(String uri){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(uri);
+        if (Build.VERSION.SDK_INT >= 14){
+            try {
+                retriever.setDataSource(uri, new HashMap<String, String>());
+            } catch (RuntimeException ex) {
+                // something went wrong with the file, ignore it and continue
+            }
+        }
+        else {
+            retriever.setDataSource(uri);
+        }
         byte[] art = retriever.getEmbeddedPicture();
         retriever.release();
         return art;

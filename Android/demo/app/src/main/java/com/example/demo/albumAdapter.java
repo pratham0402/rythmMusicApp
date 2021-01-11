@@ -3,6 +3,7 @@ package com.example.demo;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class albumAdapter extends RecyclerView.Adapter<albumAdapter.MyHolder> {
 
@@ -73,7 +75,16 @@ public class albumAdapter extends RecyclerView.Adapter<albumAdapter.MyHolder> {
 
     private byte[] getAlbumArt(String uri){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(uri);
+        if (Build.VERSION.SDK_INT >= 14){
+            try {
+                retriever.setDataSource(uri, new HashMap<String, String>());
+            } catch (RuntimeException ex) {
+                // something went wrong with the file, ignore it and continue
+            }
+        }
+        else {
+            retriever.setDataSource(uri);
+        }
         byte[] art = retriever.getEmbeddedPicture();
         retriever.release();
         return art;

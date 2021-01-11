@@ -10,6 +10,8 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.jean.jcplayer.model.JcAudio;
+import com.example.jean.jcplayer.view.JcPlayerView;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,8 @@ public class AlbumDetails extends AppCompatActivity {
     String albumName;
     ArrayList<SongInfo> albSongs = new ArrayList<>();
     AlbumDetailsAdapter albumDetailsAdapter;
+//    public static JcPlayerView jcPlayerView_off_alb;
+//    public static ArrayList<JcAudio> jcAudios_off_alb = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class AlbumDetails extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.alb_rv);
         albumPhoto = (ImageView) findViewById(R.id.albumIcon);
+//        jcPlayerView_off_alb = findViewById(R.id.jcplayer_off_alb);
         albumName = getIntent().getStringExtra("AlbumName");
         int j = 0;
         for (int i=0; i<songInfos.size(); i++)

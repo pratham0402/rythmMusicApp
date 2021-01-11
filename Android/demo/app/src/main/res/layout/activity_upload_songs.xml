@@ -14,6 +14,7 @@
         android:layout_marginTop="20dp"
         android:text="Choose Category"
         android:textSize="16sp"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
         android:layout_marginBottom="5dp"></TextView>
@@ -22,8 +23,8 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="#93D6F8"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_tv"
         android:outlineSpotShadowColor="@color/colorAccent"
         android:visibility="visible"
         tools:visibility="visible" />
@@ -32,14 +33,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/colorAccent">
+        android:background="@drawable/custom_tv">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:background="@color/colorPrimary"
-            android:layout_margin="5dp"
+            android:textSize="10sp"
+            android:background="@drawable/custom_button"
+            android:layout_margin="10dp"
             android:onClick="openAudioFiles"
             android:text="Upload Song"
             android:textStyle="italic"
@@ -61,7 +62,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:progressTint="#0D88EB" />
 
@@ -70,9 +71,8 @@
         android:layout_height="35dp"
         android:text="UPLOAD"
         android:onClick="uploadFileToFirebase"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_button"
         android:textStyle="bold"
         android:id="@+id/uplBtn"/>
 

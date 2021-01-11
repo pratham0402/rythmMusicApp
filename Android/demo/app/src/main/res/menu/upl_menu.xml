@@ -4,7 +4,8 @@
 
     <item
         android:title="Upload"
+        android:icon="@drawable/ic_file_upload"
         android:id="@+id/uplOpt"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>
