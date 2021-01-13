@@ -29,7 +29,7 @@
     <com.example.jean.jcplayer.view.JcPlayerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/custom_button"
         android:id="@+id/jcplayer"
         android:layout_alignParentBottom="true"
         android:visibility="gone"/>

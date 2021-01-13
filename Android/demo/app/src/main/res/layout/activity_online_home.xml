@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/player_icon"
         android:layout_below="@+id/music_player_text"
         android:src="@drawable/ic_library_music_black_24dp"/>
@@ -34,7 +34,7 @@
         android:layout_below="@+id/player_icon"
         android:textColor="#FFF"
         android:textAlignment="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:textSize="40dp"
         android:id="@+id/sub_text"/>
 
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/sub_icon"
         android:layout_below="@+id/sub_text"
         android:src="@drawable/ic_radio"/>

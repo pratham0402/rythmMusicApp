@@ -24,15 +24,15 @@ public class online_radio extends AppCompatActivity {
 
 
     int[] radioImageFirst = {R.drawable.air};
-    int[] radioImageSec = { R.drawable.air, R.drawable.city, R.drawable.mirchi};
+    int[] radioImageSec = { R.drawable.comm, R.drawable.city, R.drawable.mirchi, R.drawable.redfm};
    // static Button play;
     static ImageView play_btn;
     static TextView currradio;
     static MediaPlayer mediaPlayer = new MediaPlayer();
     static boolean prepared=false, started=false;
 
-    public static String[] names = {"UNKNOWN", "RADIO CITY", "RADIO MIRCHI"};
-    public static String[] stream = {"http://stream.radioreklama.bg:80/radio1rock128", "https://prclive4.listenon.in/Hindi", "https://radioindia.net/radio/mirchi98/icecast.audio"};
+    public static String[] names = {"UNKNOWN", "RADIO CITY", "RADIO MIRCHI", "RED FM"};
+    public static String[] stream = {"http://stream.radioreklama.bg:80/radio1rock128", "https://prclive4.listenon.in/Hindi", "https://streams.radio.co/s8d06d0298/listen", "http://104.238.99.1:8000/red967.mp3"};
     String[] s = {"http://stream.radioreklama.bg:80/radio1rock128"};
 
 

@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static com.example.demo.online_songs.jcAudios;
 import static com.example.demo.online_songs.jcPlayerView;
+import static java.lang.Thread.sleep;
 
 public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.MyViewHolder> {
 
@@ -81,6 +85,16 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
             public void onClick(View v) {
                 holder.online_song_img.setVisibility(View.INVISIBLE);
                 holder.pb.setVisibility(View.VISIBLE);
+                DownloadMusic(context, songInfo.getSongTitle(), DIRECTORY_DOWNLOADS, songInfo.getSongLink());
+                try {
+                    sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                holder.pb.setVisibility(View.GONE);
+                holder.online_song_img.setVisibility(View.VISIBLE);
+
+
             }
         });
 
@@ -113,6 +127,16 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
         long sec = (duration/1000)%60;
         String converted = String.format("%d:%02d",min,sec);
         return converted;
+    }
+
+    private  void DownloadMusic(Context context, String filename, String destinationDirec, String path){
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(path);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, destinationDirec, filename+".mp3");
+
+        downloadManager.enqueue(request);
     }
 
 

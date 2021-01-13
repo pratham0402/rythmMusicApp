@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/curr_fm"
                 android:text="NO radio selected"
+                android:background="@drawable/custom_button"
                 android:textColor="@color/colorAccent"
                 android:layout_centerHorizontal="true"
                 android:textSize="20sp"
