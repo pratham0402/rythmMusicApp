@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,7 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull online_songAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final online_songAdapter.MyViewHolder holder, final int position) {
 
         final online_SongInfo songInfo = onlineSongInfos.get(position);
 
@@ -75,6 +76,14 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
             }
         });
 
+        holder.online_song_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.online_song_img.setVisibility(View.INVISIBLE);
+                holder.pb.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     @Override
@@ -85,6 +94,7 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView online_song_name, online_song_dur, online_song_artist;
         ImageView online_song_img, online_play_pause;
+        ProgressBar pb;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             online_song_name = itemView.findViewById(R.id.online_song_title);
@@ -92,6 +102,8 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
             online_song_artist = itemView.findViewById(R.id.online_song_artist);
             online_song_dur = itemView.findViewById(R.id.online_dur_tv);
             online_play_pause = itemView.findViewById(R.id.online_playPause);
+            pb = itemView.findViewById(R.id.online_pb);
+            pb.setVisibility(View.INVISIBLE);
 
         }
     }

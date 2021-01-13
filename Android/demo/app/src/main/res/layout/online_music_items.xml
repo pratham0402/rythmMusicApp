@@ -17,7 +17,15 @@
             android:id="@+id/online_song_img"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/comm"
+            android:src="@drawable/ic_file_download"
+            android:layout_centerVertical="true"/>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/online_pb"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_centerVertical="true"/>
 
         <TextView

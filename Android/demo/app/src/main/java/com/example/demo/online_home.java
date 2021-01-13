@@ -4,13 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,6 +35,8 @@ public class online_home extends AppCompatActivity {
         musicBtn = findViewById(R.id.player_icon);
         sub_text = findViewById(R.id.sub_text);
         radioBtn = findViewById(R.id.sub_icon);
+
+        //checkNetworkState(this);
 
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +74,15 @@ public class online_home extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkNetworkState(Context c){
+        ConnectivityManager connectivityManager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (!(networkInfo.isConnected() && networkInfo != null)){
+            Toast.makeText(this, "You are not connected to INTERNET ..... ", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
