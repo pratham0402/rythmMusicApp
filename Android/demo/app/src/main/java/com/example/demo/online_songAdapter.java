@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,10 +37,10 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
     }
 
     int selectedPosi;
-   Context context;
-   List<online_SongInfo> onlineSongInfos;
+    private Context context;
+    static ArrayList<online_SongInfo> onlineSongInfos;
 
-    public online_songAdapter(Context context, List<online_SongInfo> onlineSongInfos ) {
+    public online_songAdapter(Context context, ArrayList<online_SongInfo> onlineSongInfos ) {
         this.context = context;
         this.onlineSongInfos = onlineSongInfos;
     }
@@ -102,6 +103,8 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
 
     @Override
     public int getItemCount() {
+        if (onlineSongInfos == null)
+            return 0;
         return onlineSongInfos.size();
     }
 
@@ -137,6 +140,13 @@ public class online_songAdapter extends RecyclerView.Adapter<online_songAdapter.
         request.setDestinationInExternalFilesDir(context, destinationDirec, filename+".mp3");
 
         downloadManager.enqueue(request);
+    }
+
+    void updateList(ArrayList<online_SongInfo> searchList)
+    {
+        onlineSongInfos = new ArrayList<>();
+        onlineSongInfos.addAll(searchList);
+        notifyDataSetChanged();
     }
 
 

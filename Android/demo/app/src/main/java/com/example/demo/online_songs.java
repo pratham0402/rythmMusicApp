@@ -2,6 +2,7 @@ package com.example.demo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,8 +27,10 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.demo.online_songAdapter.onlineSongInfos;
 
-public class online_songs extends AppCompatActivity {
+
+public class online_songs extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerView;
     private online_songAdapter songAdapter;
@@ -35,7 +38,7 @@ public class online_songs extends AppCompatActivity {
     boolean checkIn = false;
     DatabaseReference mDatabase;
     StorageReference mStorage;
-    List<online_SongInfo> onlineSongInfoList;
+    ArrayList<online_SongInfo> onlineSongInfoList;
     ValueEventListener valueEventListener;
     public static JcPlayerView jcPlayerView;
     public static ArrayList<JcAudio> jcAudios = new ArrayList<>();
@@ -81,7 +84,7 @@ public class online_songs extends AppCompatActivity {
         jcPlayerView = findViewById(R.id.jcplayer);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         onlineSongInfoList = new ArrayList<>();
-        songAdapter = new online_songAdapter(this, onlineSongInfoList);
+        songAdapter = new online_songAdapter(this, onlineSongInfoList); //********
 
         mDatabase = FirebaseDatabase.getInstance().getReference("songs");
         valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
@@ -93,6 +96,9 @@ public class online_songs extends AppCompatActivity {
                     online_SongInfo getSongs = dss.getValue(online_SongInfo.class);
                     getSongs.setMkey(dss.getKey());
                     onlineSongInfoList.add(getSongs);
+                    if(onlineSongInfos != null){
+                        onlineSongInfoList = onlineSongInfos;
+                    }
                     jcAudios.add(JcAudio.createFromURL(getSongs.getSongTitle(), getSongs.getSongLink()));
 
                 }
@@ -113,7 +119,10 @@ public class online_songs extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.upl_menu, menu);
-        return true;
+        MenuItem item = menu.findItem(R.id.search_opt_online);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -133,5 +142,26 @@ public class online_songs extends AppCompatActivity {
         currentIndex = index;
         songAdapter.setSelectedPosi(currentIndex);
         songAdapter.notifyItemChanged(currentIndex);
+    }
+
+    // search function
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String input = newText.toLowerCase();
+        ArrayList<online_SongInfo> all_song = new ArrayList<>();
+        for(online_SongInfo song : onlineSongInfoList)
+        {
+            if (song.getSongTitle().toLowerCase().contains(input))
+            {
+                all_song.add(song);
+            }
+        }
+        songAdapter.updateList(all_song);
+        return true;
     }
 }
