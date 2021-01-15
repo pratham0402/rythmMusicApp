@@ -108,8 +108,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         {
             mediaPlayer.stop();
             mediaPlayer.release();
-            stop();
-            release();
             if (songInfos != null)
             {
                 createMediaPlayer(position);
